@@ -114,20 +114,20 @@
           </div>
         </div>
         <div class="row">
-          {% for card in range(6) %}
+          {% for wine in wines %}
           <div class="col-lg-4 mb-5 col-md-6">
             <div class="wine_v_1 text-center pb-4 pt-5">
-              <img src="images/belaya_ledi.png" alt="Image" class="img-fluid">
+              <img src={{wine.image}} alt="Image" class="img-fluid">
               <div>
-                <h3 class="heading mt-3 mb-3 text-dark">Белая леди</h3>
+                <h3 class="heading mt-3 mb-3 text-dark">{{wine.title}}</h3>
                 <p>
-                  Сорт винограда - Дамский пальчик<br/>
-                  <span class="price">399 р.</span>
+                  Сорт винограда - {{wine.grade}}<br/>
+                  <span class="price">{{wine.price}} р.</span>
                 </p>
               </div>
             </div>
           </div>
-          {% endfor %}
+          {% endfor %} 
         </div>
       </div>
     </div>
