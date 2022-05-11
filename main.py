@@ -4,32 +4,29 @@ import datetime
 from functions import year_declension
 import pandas
 from pprint import pprint
+import collections
 
 env = Environment(
     loader=FileSystemLoader('.'),
     autoescape=select_autoescape(['html'])
 )
-
 template = env.get_template('template.html')
 
 today = datetime.date.today()
 age_company = today.year - 1920
 
-excel_data_df = pandas.read_excel('wine2.xlsx', sheet_name='Лист1', usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка'], na_values='nan', keep_default_na=False)
-
+excel_data_df = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'], na_values='nan', keep_default_na=False)
 products = excel_data_df.to_dict(orient='record')
-
 categoryes = excel_data_df['Категория'].tolist()
 
-all_products = {}
 categoryes = list(set(categoryes))
+categoryes.sort()
+all_products = collections.defaultdict(list)
 
 for category in categoryes:
-    l = []
     for product in products:
         if product['Категория'] == category:
-            l.append(product)      
-    all_products[category] = l
+            all_products[category].append(product)
 
 pprint(all_products)
 
@@ -42,8 +39,12 @@ for produkt in products:
     del produkt['Цена']
     produkt['image'] = 'images/' + produkt['Картинка']
     del produkt['Картинка']
+    produkt['category'] = produkt['Категория'] 
+    del produkt['Категория'] 
+    produkt['promotion'] = produkt['Акция']
+    del produkt['Акция'] 
 
-rendered_page = template.render(products=products, age = age_company, year_declension = year_declension(age_company) )
+rendered_page = template.render(products=products, categoryes=categoryes, age = age_company, year_declension = year_declension(age_company) )
 
 with open('index.html', 'w', encoding="utf8") as file:
     file.write(rendered_page)
