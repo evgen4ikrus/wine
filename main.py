@@ -15,20 +15,22 @@ template = env.get_template('template.html')
 today = datetime.date.today()
 age_company = today.year - 1920
 
-products = pandas.read_excel('wine2.xlsx', sheet_name='Лист1', usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка'], na_values='nan', keep_default_na=False)
-products = products.to_dict(orient='record')
+excel_data_df = pandas.read_excel('wine2.xlsx', sheet_name='Лист1', usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка'], na_values='nan', keep_default_na=False)
 
-white_wines, drinks, red_wines, all_products = [], [], [], {}
-for product in products:
-    if product['Категория'] == 'Белые вина':
-        white_wines.append(product)
-    elif product['Категория'] == 'Напитки':
-        drinks.append(product)
-    else:
-        red_wines.append(product)       
-all_products['Белые вина'] = white_wines
-all_products['Напитки'] = drinks
-all_products['Красные вина'] = red_wines
+products = excel_data_df.to_dict(orient='record')
+
+categoryes = excel_data_df['Категория'].tolist()
+
+all_products = {}
+categoryes = list(set(categoryes))
+
+for category in categoryes:
+    l = []
+    for product in products:
+        if product['Категория'] == category:
+            l.append(product)      
+    all_products[category] = l
+
 pprint(all_products)
 
 for produkt in products:
