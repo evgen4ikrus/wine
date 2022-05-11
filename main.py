@@ -1,7 +1,7 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import datetime
-from functions import year_declension
+from functions import get_declension_year
 import pandas
 from pprint import pprint
 import collections
@@ -44,7 +44,7 @@ for produkt in products:
     produkt['promotion'] = produkt['Акция']
     del produkt['Акция'] 
 
-rendered_page = template.render(products=products, categoryes=categoryes, age = age_company, year_declension = year_declension(age_company) )
+rendered_page = template.render(products=products, categoryes=categoryes, age = age_company, year_declension = get_declension_year(age_company) )
 
 with open('index.html', 'w', encoding="utf8") as file:
     file.write(rendered_page)
