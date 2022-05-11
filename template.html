@@ -114,15 +114,15 @@
           </div>
         </div>
         <div class="row">
-          {% for wine in wines %}
+          {% for product in products %}
           <div class="col-lg-4 mb-5 col-md-6">
             <div class="wine_v_1 text-center pb-4 pt-5">
-              <img src={{wine.image}} alt="Image" class="img-fluid">
+              <img src={{product.image}} alt="Image" class="img-fluid">
               <div>
-                <h3 class="heading mt-3 mb-3 text-dark">{{wine.title}}</h3>
+                <h3 class="heading mt-3 mb-3 text-dark">{{product.title}}</h3>
                 <p>
-                  Сорт винограда - {{wine.grade}}<br/>
-                  <span class="price">{{wine.price}} р.</span>
+                  Сорт винограда - {{product.grade}}<br/>
+                  <span class="price">{{product.price}} р.</span>
                 </p>
               </div>
             </div>
