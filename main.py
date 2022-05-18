@@ -16,9 +16,9 @@ def main():
     autoescape=select_autoescape(['html'])
     )
     template = env.get_template('template.html')
-
+    company_foundation_year = 1920
     today = datetime.date.today()
-    age_company = today.year - 1920
+    age_company = today.year - company_foundation_year
 
     excel_data_df = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'], na_values='nan', keep_default_na=False)
     products = excel_data_df.to_dict(orient='record')
