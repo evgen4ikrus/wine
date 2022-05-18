@@ -33,8 +33,6 @@ def main():
             if product['Категория'] == category:
                 all_products[category].append(product)
 
-    pprint(all_products)
-
     for produkt in products:
         produkt['title'] = produkt['Название'] 
         del produkt['Название']
