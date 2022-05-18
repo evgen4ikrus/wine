@@ -18,7 +18,7 @@ def main():
     template = env.get_template('template.html')
     company_foundation_year = 1920
     today = datetime.date.today()
-    age_company = today.year - company_foundation_year
+    company_age = today.year - company_foundation_year
 
     excel_data_df = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', na_values='nan', keep_default_na=False)
     products = excel_data_df.to_dict(orient='record')
@@ -49,7 +49,7 @@ def main():
         produkt['promotion'] = produkt['Акция']
         del produkt['Акция'] 
 
-    rendered_page = template.render(products=products, categoryes=categoryes, age = age_company, year_declension = get_declension_year(age_company) )
+    rendered_page = template.render(products=products, categoryes=categoryes, company_age = company_age, year_declension = get_declension_year(age_company) )
 
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
