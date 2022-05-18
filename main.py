@@ -1,10 +1,14 @@
-from http.server import HTTPServer, SimpleHTTPRequestHandler
-from jinja2 import Environment, FileSystemLoader, select_autoescape
-import datetime
-from functions import get_declension_year
-import pandas
-from pprint import pprint
 import collections
+import datetime
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from pprint import pprint
+
+import isort
+import pandas
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+from functions import get_declension_year
+
 
 env = Environment(
     loader=FileSystemLoader('.'),
