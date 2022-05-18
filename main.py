@@ -20,10 +20,10 @@ def main():
     today = datetime.date.today()
     age_company = today.year - company_foundation_year
 
-    excel_data_df = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'], na_values='nan', keep_default_na=False)
+    excel_data_df = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', na_values='nan', keep_default_na=False)
     products = excel_data_df.to_dict(orient='record')
     categoryes = excel_data_df['Категория'].tolist()
-
+    
     categoryes = list(set(categoryes))
     categoryes.sort()
     all_products = collections.defaultdict(list)
