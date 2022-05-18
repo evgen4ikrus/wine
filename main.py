@@ -1,7 +1,6 @@
 import collections
 import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
-from pprint import pprint
 
 import isort
 import pandas
@@ -19,7 +18,8 @@ def main():
     company_foundation_year = 1920
     today = datetime.date.today()
     company_age = today.year - company_foundation_year
-
+    company_age = str(company_age) + ' ' + get_declension_year(company_age)
+    
     excel_data_df = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', na_values='nan', keep_default_na=False)
     products = excel_data_df.to_dict(orient='record')
     categoryes = excel_data_df['Категория'].tolist()
@@ -28,11 +28,9 @@ def main():
     categoryes.sort()
     all_products = collections.defaultdict(list)
 
-    for category in categoryes:
-        for product in products:
-            if product['Категория'] == category:
-                all_products[category].append(product)
-
+    for product in products:
+        all_products[product['Категория']].append(product)
+    
     for produkt in products:
         produkt['title'] = produkt['Название'] 
         del produkt['Название']
@@ -47,7 +45,7 @@ def main():
         produkt['promotion'] = produkt['Акция']
         del produkt['Акция'] 
 
-    rendered_page = template.render(products=products, categoryes=categoryes, company_age = company_age, year_declension = get_declension_year(age_company) )
+    rendered_page = template.render(all_products=all_products, company_age = company_age)
 
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
