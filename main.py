@@ -22,28 +22,25 @@ def main():
     
     excel_data_df = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', na_values='nan', keep_default_na=False)
     products = excel_data_df.to_dict(orient='record')
-    categoryes = excel_data_df['Категория'].tolist()
-    
-    categoryes = list(set(categoryes))
-    categoryes.sort()
+
     all_products = collections.defaultdict(list)
 
     for product in products:
         all_products[product['Категория']].append(product)
     
-    for produkt in products:
-        produkt['title'] = produkt['Название'] 
-        del produkt['Название']
-        produkt['grade'] = produkt['Сорт']
-        del produkt['Сорт']
-        produkt['price'] = produkt['Цена']
-        del produkt['Цена']
-        produkt['image'] = 'images/' + produkt['Картинка']
-        del produkt['Картинка']
-        produkt['category'] = produkt['Категория'] 
-        del produkt['Категория'] 
-        produkt['promotion'] = produkt['Акция']
-        del produkt['Акция'] 
+    for product in products:
+        product['title'] = product['Название'] 
+        del product['Название']
+        product['grade'] = product['Сорт']
+        del product['Сорт']
+        product['price'] = product['Цена']
+        del product['Цена']
+        product['image'] = 'images/' + product['Картинка']
+        del product['Картинка']
+        product['category'] = product['Категория'] 
+        del product['Категория'] 
+        product['promotion'] = product['Акция']
+        del product['Акция'] 
 
     rendered_page = template.render(all_products=all_products, company_age = company_age)
 
