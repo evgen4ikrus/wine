@@ -2,9 +2,20 @@ from collections import defaultdict
 import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
+import argparse
 import isort
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+def get_wine_cards_xlsx_filepath():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-f',
+        '--filepath',
+        help='Укажите путь к файлу с продукцией, по умолчанию table_sample.xlsx',
+        default='table_sample.xlsx')
+    args = parser.parse_args()
+    return args.filepath
 
 
 def get_company_age(company_foundation_year):
@@ -27,9 +38,12 @@ def main():
     autoescape=select_autoescape(['html'])
     )
     template = env.get_template('template.html')
+    
     company_foundation_year = 1920
-    company_age = get_company_age(company_foundation_year) 
-    excel_data_df = pandas.read_excel('table_sample.xlsx', sheet_name='Лист1', na_values='nan', keep_default_na=False)
+    company_age = get_company_age(company_foundation_year)
+    
+    products_filepath = get_wine_cards_xlsx_filepath()
+    excel_data_df = pandas.read_excel(products_filepath, sheet_name='Лист1', na_values='nan', keep_default_na=False)
     products = excel_data_df.to_dict(orient='record')
 
     all_products = defaultdict(list)
