@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 ## Запуск
 
-- Запустите сайт использую файл с продукцией по умолчанию `table_sample.xlsx`
+- Запустите сайт используя файл с продукцией по умолчанию `table_sample.xlsx`
 
 ```bash
 python main.py
