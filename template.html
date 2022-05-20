@@ -119,20 +119,20 @@
                 <h2 class="d-block">{{category}}</h2>
               </div>
             {% for product in products %}
-              {% if product.category == category %}
+              {% if product.Категория == category %}
                 <div class="col-lg-4 mb-5 col-md-6">
                   <div class="wine_v_1 text-center pb-4 pt-5">
-                    <img src={{product.image}} alt="Image" class="img-fluid">
+                    <img src="images/{{product.Картинка}}" alt="Image" class="img-fluid">
                     {% if product.promotion %}
                       <img src="assets/profitable.png" style="width:10rem;height: 10rem;position:absolute;right: -20px;top: -20px;">
                     {% endif %}
                     <div>
-                      <h3 class="heading mt-3 mb-3 text-dark">{{product.title}}</h3>
+                      <h3 class="heading mt-3 mb-3 text-dark">{{product.Название}}</h3>
                       <p>
                         {% if product.grade %}
-                          Сорт винограда - {{product.grade}}<br/>
+                          Сорт винограда - {{product.Сорт}}<br/>
                         {% endif %}
-                        <span class="price">{{product.price}} р.</span>
+                        <span class="price">{{product.Цена}} р.</span>
                       </p>
                     </div>
                   </div>
