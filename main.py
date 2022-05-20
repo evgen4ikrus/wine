@@ -20,7 +20,7 @@ def main():
     company_age = today.year - company_foundation_year
     company_age = str(company_age) + ' ' + get_declension_year(company_age)
     
-    excel_data_df = pandas.read_excel('wine3.xlsx', sheet_name='Лист1', na_values='nan', keep_default_na=False)
+    excel_data_df = pandas.read_excel('table_sample.xlsx', sheet_name='Лист1', na_values='nan', keep_default_na=False)
     products = excel_data_df.to_dict(orient='record')
 
     all_products = collections.defaultdict(list)
