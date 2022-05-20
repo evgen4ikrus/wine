@@ -1,11 +1,11 @@
-from collections import defaultdict
+import argparse
 import datetime
+from collections import defaultdict
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-import argparse
-import isort
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
 
 def get_wine_cards_xlsx_filepath():
     parser = argparse.ArgumentParser()
