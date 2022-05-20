@@ -7,7 +7,7 @@ import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
-def get_wine_cards_xlsx_filepath():
+def get_products_xlsx_filepath():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-f',
@@ -42,7 +42,7 @@ def main():
     company_foundation_year = 1920
     company_age = get_company_age(company_foundation_year)
     
-    products_filepath = get_wine_cards_xlsx_filepath()
+    products_filepath = get_products_xlsx_filepath()
     excel_data_df = pandas.read_excel(products_filepath, sheet_name='Лист1', na_values='nan', keep_default_na=False)
     products = excel_data_df.to_dict(orient='record')
 
@@ -55,7 +55,7 @@ def main():
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
 
-    server = HTTPServer(('0.0.0.0', 8008), SimpleHTTPRequestHandler)
+    server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
     server.serve_forever()
     
     
