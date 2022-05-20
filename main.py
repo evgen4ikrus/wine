@@ -29,18 +29,12 @@ def main():
         all_products[product['Категория']].append(product)
     
     for product in products:
-        product['title'] = product['Название'] 
-        del product['Название']
-        product['grade'] = product['Сорт']
-        del product['Сорт']
-        product['price'] = product['Цена']
-        del product['Цена']
-        product['image'] = 'images/' + product['Картинка']
-        del product['Картинка']
-        product['category'] = product['Категория'] 
-        del product['Категория'] 
-        product['promotion'] = product['Акция']
-        del product['Акция'] 
+        product['title'] = product.pop('Название')
+        product['grade'] = product.pop('Сорт')
+        product['price'] = product.pop('Цена')
+        product['image'] = 'images/' + product.pop('Картинка')
+        product['category'] = product.pop('Категория')
+        product['promotion'] = product.pop('Акция')
 
     rendered_page = template.render(all_products=all_products, company_age = company_age)
 
