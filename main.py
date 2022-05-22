@@ -42,15 +42,15 @@ def main():
     company_foundation_year = 1920
     company_age = get_company_age(company_foundation_year)
     
-    products_filepath = get_products_xlsx_filepath()
-    excel_data_df = pandas.read_excel(products_filepath, sheet_name='Лист1', na_values='nan', keep_default_na=False)
-    products = excel_data_df.to_dict(orient='record')
+    wine_cards_filepath = get_products_xlsx_filepath()
+    excel_data_df = pandas.read_excel(wine_cards_filepath, sheet_name='Лист1', na_values='nan', keep_default_na=False)
+    wine_cards = excel_data_df.to_dict(orient='record')
 
-    all_products = defaultdict(list)
-    for product in products:
-        all_products[product['Категория']].append(product)
+    grouped_wine_cards = defaultdict(list)
+    for wine_card in wine_cards:
+        grouped_wine_cards[wine_card['Категория']].append(wine_card)
 
-    rendered_page = template.render(all_products=all_products, company_age = company_age)
+    rendered_page = template.render(grouped_wine_cards=grouped_wine_cards, company_age = company_age)
 
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
